@@ -1,0 +1,59 @@
+.gallery-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 3rem 0;
+  gap: 2rem;
+  justify-content: center;
+
+  /* Masque la barre si tu veux */
+  scrollbar-width: none;
+}
+.gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  flex: 0 0 70%;
+  max-width: 700px;
+  scroll-snap-align: center;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  position: relative;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-slide p {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f8f8f8;
+  margin: 0;
+}
+
+.blurred {
+  filter: blur(3px);
+  opacity: 0.7;
+  transform: scale(0.95);
+}
+
+.active {
+  filter: none;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gallery-container {
+  padding-inline: 4vw;
+}

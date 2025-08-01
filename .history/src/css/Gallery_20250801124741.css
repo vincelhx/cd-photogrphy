@@ -1,0 +1,39 @@
+.gallery-container {
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  width: 100vw;
+  height: 100vh;
+}
+
+.gallery-slide {
+  scroll-snap-align: center;
+  flex: 0 0 100vw;
+  position: relative;
+  text-align: center;
+  transition: filter 0.3s ease;
+}
+
+.gallery-slide img {
+  width: 100vw;
+  height: calc(100vh - 4rem);
+  object-fit: cover;
+}
+
+.gallery-slide p {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  color: white;
+  font-size: 1.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+}
+
+.blurred {
+  filter: blur(3px);
+}
+
+.active {
+  filter: none;
+}

@@ -1,0 +1,29 @@
+.hero {
+    background: url('/public/image.png') center/cover no-repeat;
+    color: white;
+    text-align: center;
+    padding: 6rem 1rem;
+  }
+  
+  .hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .about {
+    margin: 4rem auto;
+    text-align: center;
+  }
+  
+  .footer {
+    background-color: #222;
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+  }
+  

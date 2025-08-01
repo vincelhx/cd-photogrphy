@@ -1,0 +1,52 @@
+.gallery-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 2rem;
+  padding: 2rem 10vw;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  flex: 0 0 60vw;
+  max-width: 700px;
+  scroll-snap-align: center;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  position: relative;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-slide p {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f8f8f8;
+}
+
+.blurred {
+  filter: blur(3px);
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.active {
+  filter: none;
+  opacity: 1;
+  transform: scale(1);
+}
