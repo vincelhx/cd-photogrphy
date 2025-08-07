@@ -1,0 +1,85 @@
+.gallery-wrapper {
+  position: relative;
+}
+
+.gallery-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 2rem;
+  padding: 2rem 30vw; /* ← Important pour centrer la carte */
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-container::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  flex: 0 0 40vw;
+  max-width: 600px;
+  scroll-snap-align: center;
+  background-color: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, filter 0.3s ease;
+  position: relative;
+}
+
+.gallery-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-slide p {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 1rem;
+  font-weight: 500;
+  color: #333;
+  background-color: #f8f8f8;
+}
+
+.blurred {
+  filter: blur(3px);
+  opacity: 0.6;
+  transform: scale(0.95);
+}
+
+.active {
+  filter: none;
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ✅ Flèches bien positionnées */
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.85);
+  border: none;
+  font-size: 2rem;
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background 0.2s ease;
+}
+
+.nav-arrow:hover {
+  background: white;
+}
+
+.nav-arrow.left {
+  left: 2vw;
+}
+
+.nav-arrow.right {
+  right: 2vw;
+}

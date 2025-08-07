@@ -1,0 +1,25 @@
+.portfolio h1 {
+    text-align: center;
+    margin: 2rem 0;
+  }
+  
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .photo-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .photo-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  

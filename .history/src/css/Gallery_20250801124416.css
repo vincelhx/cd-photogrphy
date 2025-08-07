@@ -1,0 +1,42 @@
+.gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    scroll-snap-type: x mandatory;
+  
+    /* Largeur auto et sans contrainte */
+    width: 100vw;
+    box-sizing: border-box;
+  }
+  
+  .photo-card {
+    flex: 0 0 auto;
+    width: 500px;
+    border-radius: 12px;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    scroll-snap-align: start;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .photo-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .photo-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .photo-card p {
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    color: #333;
+    user-select: none;
+  }
+  

@@ -1,0 +1,122 @@
+import React, { useEffect, useRef, useState } from 'react';
+
+type Photo = {
+  id: number;
+  title: string;
+  src: string;
+};
+
+type GalleryProps = {
+  photos: Photo[];
+};
+
+const Gallery: React.FC<GalleryProps> = ({ photos }) => {
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const scrollToIndex = (index: number) => {
+    const slide = galleryRef.current?.children[index] as HTMLElement;
+    if (slide) {
+      slide.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+  };
+
+  const updateActiveSlide = () => {
+    if (!galleryRef.current) return;
+
+    const centerX = galleryRef.current.getBoundingClientRect().left + galleryRef.current.offsetWidth / 2;
+
+    let closest = 0;
+    let minDistance = Infinity;
+
+    Array.from(galleryRef.current.children).forEach((child, index) => {
+      const el = child as HTMLElement;
+      const box = el.getBoundingClientRect();
+      const slideCenter = box.left + box.width / 2;
+      const distance = Math.abs(centerX - slideCenter);
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        closest = index;
+      }
+    });
+
+    setActiveIndex(closest);
+  };
+
+  useEffect(() => {
+    const ref = galleryRef.current;
+    if (!ref) return;
+
+    ref.addEventListener('scroll', updateActiveSlide);
+    window.addEventListener('resize', updateActiveSlide);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') scrollToIndex(Math.min(activeIndex + 1, photos.length - 1));
+      if (e.key === 'ArrowLeft') scrollToIndex(Math.max(activeIndex - 1, 0));
+    });
+
+    updateActiveSlide();
+
+    return () => {
+      ref.removeEventListener('scroll', updateActiveSlide);
+      window.removeEventListener('resize', updateActiveSlide);
+    };
+  }, [activeIndex]);
+
+  return (
+  <div className="relative w-full h-[80vh] flex items-center justify-center bg-white">
+  {/* ← Flèche gauche */}
+  <button
+    onClick={() => {
+      const newIndex = Math.max(0, activeIndex - 1);
+      scrollToIndex(newIndex);
+      setActiveIndex(newIndex);
+    }}
+    className="absolute left-[15%] top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full shadow px-3 py-2 text-2xl"
+  >
+    ◀
+  </button>
+
+      {/* Slides */}
+      <div
+        ref={galleryRef}
+        className="flex overflow-x-auto scroll-smooth snap-x snap-mandatory px-[30vw] gap-8 py-8 no-scrollbar"
+      >
+        {photos.map((photo, index) => (
+          <div
+            key={photo.id}
+            className={`shrink-0 w-[45vw] max-w-[700px] h-[60vh] flex flex-col justify-between bg-white rounded-xl overflow-hidden shadow-xl snap-center transition-all duration-300 ${
+              index === activeIndex
+                ? 'scale-100 opacity-100 blur-0'
+                : 'scale-95 opacity-60 blur-sm'
+            }`}
+          >
+            <img
+              src={photo.src}
+              alt={photo.title}
+              className="w-full h-full object-cover"
+            />
+            <p className="text-center text-gray-800 bg-gray-100 py-4 font-medium">
+              {photo.title}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* → Flèche droite */}
+<button
+  onClick={() => {
+    const newIndex = Math.min(photos.length - 1, activeIndex + 1);
+    scrollToIndex(newIndex);
+    setActiveIndex(newIndex);
+  }}
+  className="absolute right-[15%] top-1/2 -translate-y-1/2 z-10 bg-white/80 hover:bg-white rounded-full shadow px-3 py-2 text-2xl"
+>
+  ▶
+</button>
+
+    </div>
+  );
+};
+
+export default Gallery;
